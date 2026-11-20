@@ -1,5 +1,7 @@
+
 const form = document.querySelector("#register-form");
 const message = document.querySelector("#message");
+const button = document.querySelector("#register-button");
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -7,10 +9,12 @@ form.addEventListener("submit", async (event) => {
   const customer = {
     name: document.querySelector("#name").value.trim(),
     address: document.querySelector("#address").value.trim(),
-    email: document.querySelector("#email").value.trim()
+    email: document.querySelector("#email").value.trim(),
+    password: document.querySelector("#password").value
   };
 
-  message.textContent = "Registering...";
+  message.textContent = "Creating account...";
+  button.disabled = true;
 
   try {
     const response = await fetch(
@@ -27,13 +31,19 @@ form.addEventListener("submit", async (event) => {
     const result = await response.json();
 
     if (!response.ok) {
-      throw new Error(result.message || "Registration failed.");
+      throw new Error(
+        result.message || "Account creation failed."
+      );
     }
 
-    message.textContent = "Registration successful!";
+    message.textContent = "Account created successfully!";
     form.reset();
+
   } catch (error) {
-    console.error(error);
+    console.error("Registration error:", error);
     message.textContent = error.message;
+
+  } finally {
+    button.disabled = false;
   }
 });
