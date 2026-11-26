@@ -4,34 +4,192 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Review your order and securely complete your Sleep Outside checkout."
+    />
+
     <title>Sleep Outside | Checkout</title>
-    <link rel="stylesheet" href="%BASE_URL%css/style.css" />
+
+    <link rel="stylesheet" href="../css/style.css" />
   </head>
 
   <body>
     <header class="divider">
       <div class="logo">
-        <img src="%BASE_URL%images/noun_Tent_2517.svg" alt="tent image for logo" />
+        <img
+          src="../images/noun_Tent_2517.svg"
+          alt="Sleep Outside tent logo"
+        />
 
-        <a href="%BASE_URL%">
-          Sleep
-          <span class="highlight">Outside</span>
+        <a href="../index.html">
+          Sleep <span class="highlight">Outside</span>
         </a>
       </div>
 
       <div class="cart">
-        <a href="%BASE_URL%cart/">
-          <!-- Keep your original complete cart SVG here -->
+        <a href="../cart/index.html" aria-label="Return to shopping cart">
+          Cart
         </a>
       </div>
     </header>
 
-    <main class="divider">
+    <main class="divider checkout">
+      <h1>Checkout</h1>
+
       <section class="products">
-        <h2>Review & Place your Order</h2>
+        <h2>Review & Place Your Order</h2>
+
+        <!-- Order Summary -->
+        <section id="order-summary" aria-labelledby="summary-heading">
+          <h3 id="summary-heading">Order Summary</h3>
+
+          <p>
+            Number of items:
+            <span id="item-count">0</span>
+          </p>
+
+          <p>
+            Subtotal:
+            $<span id="subtotal">0.00</span>
+          </p>
+
+          <p>
+            Tax:
+            $<span id="tax">0.00</span>
+          </p>
+
+          <p>
+            Shipping:
+            $<span id="shipping">0.00</span>
+          </p>
+
+          <h3>
+            Order Total:
+            $<span id="order-total">0.00</span>
+          </h3>
+        </section>
+
+        <!-- Checkout Messages -->
+        <p
+          id="checkout-message"
+          role="status"
+          aria-live="polite"
+        ></p>
+
+        <!-- Checkout Form -->
+        <form id="checkout-form">
+          <fieldset>
+            <legend>Customer Information</legend>
+
+            <label for="fname">First Name</label>
+            <input
+              type="text"
+              id="fname"
+              name="fname"
+              autocomplete="given-name"
+              required
+            />
+
+            <label for="lname">Last Name</label>
+            <input
+              type="text"
+              id="lname"
+              name="lname"
+              autocomplete="family-name"
+              required
+            />
+
+            <label for="street">Street Address</label>
+            <input
+              type="text"
+              id="street"
+              name="street"
+              autocomplete="street-address"
+              required
+            />
+
+            <label for="city">City</label>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              autocomplete="address-level2"
+              required
+            />
+
+            <label for="state">State</label>
+            <input
+              type="text"
+              id="state"
+              name="state"
+              autocomplete="address-level1"
+              required
+            />
+
+            <label for="zip">ZIP / Postal Code</label>
+            <input
+              type="text"
+              id="zip"
+              name="zip"
+              autocomplete="postal-code"
+              required
+              minlength="3"
+            />
+          </fieldset>
+
+          <fieldset>
+            <legend>Payment Information</legend>
+
+            <label for="cardNumber">Card Number</label>
+            <input
+              type="text"
+              id="cardNumber"
+              name="cardNumber"
+              inputmode="numeric"
+              autocomplete="cc-number"
+              pattern="[0-9 ]{13,19}"
+              title="Enter a card number containing 13 to 19 digits."
+              required
+            />
+
+            <label for="expiration">Expiration Date</label>
+            <input
+              type="text"
+              id="expiration"
+              name="expiration"
+              placeholder="MM/YY"
+              autocomplete="cc-exp"
+              pattern="(0[1-9]|1[0-2])\/[0-9]{2}"
+              title="Enter the expiration date in MM/YY format."
+              required
+            />
+
+            <label for="code">Security Code</label>
+            <input
+              type="password"
+              id="code"
+              name="code"
+              inputmode="numeric"
+              autocomplete="cc-csc"
+              pattern="[0-9]{3,4}"
+              title="Enter a 3 or 4 digit security code."
+              required
+            />
+          </fieldset>
+
+          <button type="submit" class="checkout-button">
+            Place Your Order
+          </button>
+        </form>
       </section>
     </main>
 
-    <footer>&copy;NOT a real business</footer>
+    <footer>
+      &copy; NOT a real business
+    </footer>
+
+    <script type="module" src="../js/CheckoutProcess.mjs"></script>
   </body>
 </html>
